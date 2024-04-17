@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}제품 페이지{% endblock %}
+
+{% block content %}
+<div class="container" style="min-height: 100vh; padding-top: 80px; padding-bottom: 30px; background-color: #f8f9fa;">
+    <h2 style="font-size: 24px; color: #333; padding-bottom: 10px;">모든 주문 내역 조회</h2>
+    <form action="/all_orders" method="post">
+        <div class="form-group">
+            <label for="order_date" style="color: #333;">날짜 선택:</label>
+            <input type="date" class="form-control" id="order_date" name="order_date" value="{{ selected_date }}" required style="border-radius: 5px;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="background-color: #4e73df; border: none; border-radius: 5px;">조회하기</button>
+    </form>
+
+    {% if orders_by_branch %}
+        <div class="row mt-4">
+            {% for branch_name, orders in orders_by_branch.items() %}
+                <div class="col-lg-6 col-md-12">
+                    <div class="card mb-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <div class="card-header" style="background-color: #e2eaff;">
+                            <h4 style="font-size: 16px; font-weight: bold; color: #4e73df;">{{ branch_name }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table" style="font-size: 14px;">
+                                <thead>
+                                    <tr>
+                                        <th style="color: #555;">품목 이름</th>
+                                        <th style="color: #555;">색상</th>
+                                        <th style="color: #555;">수량</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                        <tr style="font-size: 14px;">
+                                            <td>{{ order.product_name }}</td>
+                                            <td>{{ order.color }}</td>
+                                            <td>{{ order.total_quantity }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <form action="/download_all_orders" method="post" class="mt-3">
+            <input type="hidden" name="order_date" value="{{ selected_date }}">
+            <button type="submit" class="btn btn-success" style="background-color: #1cc88a; border: none; border-radius: 5px;">엑셀로 다운로드</button>
+        </form>
+    {% endif %}
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

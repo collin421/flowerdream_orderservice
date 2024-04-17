@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Dream - Main Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            height: 100%;
+            background-image: url("{{ url_for('static', filename='images/index_bg_image.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: rgb(255, 255, 255); /* 파란색으로 변경 */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6); /* 검은색 반투명 레이어 */
+        }
+        .centered-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2; /* 레이어 위에 위치하도록 z-index 설정 */
+        }
+        .btn-admin {
+            border: 2px solid #ffffff; /* 버튼 테두리 색상 */
+            background-color: transparent; /* 투명 배경 */
+            color: #ffffff; /* 버튼 텍스트 색상 */
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-admin:hover {
+            background-color: #ffffff; /* 마우스 오버 시 배경 색상 */
+            color: rgb(26, 26, 26); /* 마우스 오버 시 텍스트 색상 */
+        }
+        @media (max-width: 768px) {
+            .centered-content {
+                font-size: 30px;
+            }
+            .btn-admin {
+                width: 100%;
+                margin-top: 30px; /* 모바일 환경에서 버튼을 더 아래로 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="centered-content">
+            <h1 class="my-4">Flower Dream</h1>
+            <a href="/products" class="btn btn-admin">Admin Page</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
